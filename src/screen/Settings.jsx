@@ -3,6 +3,6 @@ import { withStyles } from '@material-ui/styles';
 
 export default withStyles({
 
-})(function Editor({classes}) {
+})(function Settings({ classes }) {
 	return <div />;
 });

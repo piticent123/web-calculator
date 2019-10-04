@@ -1,27 +1,31 @@
-import * as React from 'react';
-import {withStyles} from '@material-ui/styles';
-import {Grid, Paper, Typography} from '@material-ui/core';
+import React, { useContext } from 'react';
+import { withStyles } from '@material-ui/styles';
+import { Grid } from '@material-ui/core';
 
-const styles = {
+import { PreferenceContext } from '../Store';
+
+export default withStyles({
+	root: {
+		flex: 1
+	},
 	equation: {
 		margin: '2rem',
 		padding: '1rem 2rem'
 	}
-};
+})(function Editor({classes}) {
+	const editor = useContext(PreferenceContext);
 
-export default withStyles(styles)(class Editor extends React.Component {
-	render() {
-		const {classes} = this.props;
-
-		return (<Grid container>
-			<Grid item xs={12}>
-				<Paper className={classes.equation}>
-					<Typography variant="h4">
-						x + 2
-					</Typography>
-				</Paper>
-			</Grid>
-			<h1>This is a editor!</h1>
-		</Grid>);
+	function renderEditor() {
+		switch (editor) {
+			case 'arithmetic':
+			case 'calculus':
+			case 'statistics':
+			case 'algebra':
+			default: return <div />;
+		}
 	}
+
+	return (<Grid container className={classes.root}>
+		{renderEditor()}
+	</Grid>);
 });
