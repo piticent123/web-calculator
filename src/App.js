@@ -7,11 +7,11 @@ import Screen from './screen';
 export default withStyles({
 	root: {
 		backgroundColor: '#F5F5F5',
-		height: '100vh',
-		width: '100vw',
+		height: '98vh',
+		width: '98vw',
 		position: 'absolute',
-		left: 0,
-		top: 0,
+		left: '1vw',
+		top: '1vh',
 		overflow: 'auto',
 		display: 'flex',
 		flexDirection: 'column'

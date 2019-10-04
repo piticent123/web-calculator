@@ -12,6 +12,7 @@ export default withStyles({
 		flexBasis: '50%',
 		display: 'flex',
 		flexDirection: 'column',
+		border: '10px solid black',
 	},
 	display: {
 		flex: 1,
