@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {BottomNavigation, BottomNavigationAction} from '@material-ui/core';
-import {withStyles} from '@material-ui/styles';
+import {makeStyles} from '@material-ui/styles';
 
 import History from './History';
 import Graph from './Graph';
 import Editor from './Editor';
 import Settings from './Settings';
+import {PreferenceContext} from '../Store';
 
-export default withStyles({
+const useStyles = makeStyles({
 	root: {
-		flexBasis: '50%',
+		flexBasis: settings => settings.screenHeight + '%',
 		display: 'flex',
 		flexDirection: 'column',
 		border: '10px solid black',
@@ -17,8 +18,12 @@ export default withStyles({
 	display: {
 		flex: 1,
 	}
-})(function Screen({classes}) {
+});
+
+export default function Screen() {
 	const [activeTab, setActiveTab] = useState('history');
+	const settings = useContext(PreferenceContext);
+	const classes = useStyles(settings);
 
 	function renderScreen() {
 		switch(activeTab) {
@@ -43,4 +48,4 @@ export default withStyles({
 			</BottomNavigation>
 		</div>
 	</div>);
-});
+};

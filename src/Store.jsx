@@ -1,14 +1,13 @@
-import React, { createContext, useState } from 'react';
+import React, {useState, createContext} from 'react';
 
 export const PreferenceContext = createContext();
 export const DataContext = createContext();
 
 export default function Store({children}) {
 	const [preferences, setPreferences] = useState({
+		set: name => e => setPreferences(Object.assign({}, preferences, {[name]: e.target.value})),
 		screenHeight: 33,
-		setScreenHeight: screenHeight => setPreferences(Object.assign(preferences, {screenHeight})),
 		editor: 'arithmetic',
-		setEditor: editor => setPreferences(Object.assign(preferences, {editor})),
 	});
 
 	// TODO: These really should be broken out, especially because this doesn't work
@@ -21,8 +20,8 @@ export default function Store({children}) {
 		setFunction: (k, v) => setData(Object.assign(data, {[k]: v})),
 	});
 
-	return <PreferenceContext.Provider data={preferences}>
-		<DataContext.Provider data={data}>
+	return <PreferenceContext.Provider value={preferences}>
+		<DataContext.Provider value={data}>
 			{children}
 		</DataContext.Provider>
 	</PreferenceContext.Provider>;
