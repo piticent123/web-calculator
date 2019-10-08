@@ -21,6 +21,12 @@ export default function Store({ children }) {
 		set: name => e => setPreferences({ ...preferences, [name]: e.target.value }),
 		screenHeight: 50,
 		editor: 'arithmetic',
+		startX: -10,
+		startY: -10,
+		stopX: 10,
+		stopY: 10,
+		stepX: 1,
+		stepY: 1,
 	});
 
 	const [data, dispatch] = useReducer(function (state, action) {
@@ -111,7 +117,7 @@ export default function Store({ children }) {
 	}, {
 		variables: {hello: 'world'},
 		lists: {},
-		functions: {},
+		functions: {f1: 'x'},
 	});
 
 	return <PreferenceContext.Provider value={preferences}>

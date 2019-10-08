@@ -18,7 +18,8 @@ const useStyles = makeStyles({
 	},
 	display: {
 		flex: 1,
-		overflow: 'auto'
+		overflow: 'auto',
+		position: 'relative',
 	}
 });
 

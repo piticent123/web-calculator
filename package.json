@@ -5,8 +5,9 @@
   "dependencies": {
     "@material-ui/core": "^4.5.0",
     "@material-ui/styles": "^4.5.0",
-    "lodash.debounce": "^4.0.8",
-    "lodash.merge": "^4.6.2",
+    "chart.js": "^2.8.0",
+    "lodash.range": "^3.2.0",
+    "mathjs": "^6.2.3",
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
