@@ -10,13 +10,15 @@ import {PreferenceContext} from '../Store';
 
 const useStyles = makeStyles({
 	root: {
-		flexBasis: settings => settings.screenHeight + '%',
+		flex: settings => `0 0 ${settings.screenHeight}%`,
+		overflow: 'hidden',
 		display: 'flex',
 		flexDirection: 'column',
 		border: '10px solid black',
 	},
 	display: {
 		flex: 1,
+		overflow: 'auto'
 	}
 });
 
