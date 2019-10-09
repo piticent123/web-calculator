@@ -1,4 +1,4 @@
-import React, { useState, useReducer, createContext } from 'react';
+import React, {useState, useReducer, createContext, useEffect} from 'react';
 
 export const PreferenceContext = createContext();
 export const DataContext = createContext();
@@ -14,23 +14,29 @@ export const DataEvents = {
 	CHANGE_LIST_NAME: 'change list name',
 	ADD_LIST: 'add list',
 	REMOVE_LIST: 'remove list',
+	LOAD: 'load',
 };
 
 export default function Store({ children }) {
-	const [preferences, setPreferences] = useState({
+	const storedPreferences = localStorage.getItem('preferences');
+	const [preferences, setPreferences] = useState({...(storedPreferences ? JSON.parse(storedPreferences) : {
+			screenHeight: 50,
+			editor: 'arithmetic',
+			startX: -10,
+			startY: -10,
+			stopX: 10,
+			stopY: 10,
+			stepX: 1,
+			stepY: 1,
+		}),
 		set: name => e => setPreferences({ ...preferences, [name]: e.target.value }),
-		screenHeight: 50,
-		editor: 'arithmetic',
-		startX: -10,
-		startY: -10,
-		stopX: 10,
-		stopY: 10,
-		stepX: 1,
-		stepY: 1,
 	});
 
+	const storedData = localStorage.getItem('data');
 	const [data, dispatch] = useReducer(function (state, action) {
 		switch (action.type) {
+			case DataEvents.LOAD:
+				return action.data;
 			case DataEvents.SET_VARIABLE:
 				return {
 					...state, 
@@ -114,11 +120,16 @@ export default function Store({ children }) {
 			default:
 				return state;
 		}
-	}, {
+	}, storedData ? JSON.parse(storedData) : {
 		variables: {hello: 'world'},
 		lists: {},
 		functions: {f1: 'x'},
 	});
+
+	useEffect(() => {
+		localStorage.setItem('preferences', JSON.stringify(preferences));
+		localStorage.setItem('data', JSON.stringify(data));
+	}, [preferences, data]);
 
 	return <PreferenceContext.Provider value={preferences}>
 		<DataContext.Provider value={[data, dispatch]}>
