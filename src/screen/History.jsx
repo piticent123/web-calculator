@@ -5,16 +5,13 @@ import {withStyles} from '@material-ui/styles';
 import ExpressionEditor from '../ExpressionEditor';
 
 export default withStyles({
-
+	root: {
+		padding: '1rem',
+	}
 })(function History({ classes }) {
-	return <div>
-		<Grid item xs={12}>
-			<Paper className={classes.equation}>
-				<Typography variant="h4">
-					x + 2
-				</Typography>
-				<ExpressionEditor />
-			</Paper>
-		</Grid>
+	return <div className={classes.root}>
+		<Paper className={classes.equation}>
+			<ExpressionEditor />
+		</Paper>
 	</div>
 });
