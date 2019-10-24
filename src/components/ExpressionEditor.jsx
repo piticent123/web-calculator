@@ -3,12 +3,18 @@ import {BlockMath, InlineMath} from 'react-katex';
 import {Popper, List, ListItem, ListItemText, Paper} from '@material-ui/core';
 import {withStyles} from '@material-ui/styles';
 
-import {DataContext} from './Store';
+import {DataContext} from 'components/Store';
+import {mathToLatex} from 'utils';
 
 const Sources = {
     Variable: 'Variable',
     List: 'List',
     Function: 'Function',
+};
+
+const KeyCodes = {
+    UpArrow: 38,
+    DownArrow: 40,
 };
 
 export default withStyles({
@@ -43,17 +49,12 @@ export default withStyles({
     popper: {
         width: 'calc(100vw - 2 * (2rem + 10px) - 4px)',
     },
-})(function ExpressionEditor({classes}) {
+})(function ExpressionEditor({classes, onSubmit}) {
     const input = useRef(null);
     const blockMath = useRef(null);
     const [math, setMath] = useState('');
-    const [popper, setPopper] = useState({open: false, suggestions: []});
+    const [popper, setPopper] = useState({open: false, autocompleteTerm: '', suggestions: []});
     const [{functions, lists, variables}] = useContext(DataContext);
-
-    function mathToLatex(math) {
-        return math
-            .replace(/(\w+|\(.*\))\/(\w+|\(.*\))?/g, '\\frac{$1}{$2}');
-    }
 
     function focusInput() {
         input.current.focus();
@@ -89,6 +90,7 @@ export default withStyles({
 
         setPopper({
             open: !!(newMath && /[A-Za-z]/.exec(newMath[newMath.length - 1]) && suggestions.length),
+            autocompleteTerm,
             suggestions,
         });
     }
@@ -97,12 +99,33 @@ export default withStyles({
         return <span><span style={{color: 'grey'}}>[{source}]</span> <span dangerouslySetInnerHTML={{__html: name}} /> - <InlineMath>{value}</InlineMath></span>;
     }
 
-    return (<div className={classes.root} ref={blockMath}>
+    function focusAutocomplete({keyCode}) {
+        if (keyCode === KeyCodes.UpArrow) {
+
+        } else if (keyCode === KeyCodes.DownArrow) {
+
+        }
+
+        // mark start of term with  ~~
+    }
+
+    return (<form className={classes.root} ref={blockMath} onSubmit={onSubmit ? () => onSubmit(math) : undefined}>
         <div onClick={focusInput} className={classes.math}>
             <BlockMath>{mathToLatex(math)}</BlockMath>
         </div>
-        <input ref={input} value={math} onChange={updateInput} className={classes.input} spellCheck={false} />
-        <Popper open={popper.open} anchorEl={popper.open ? blockMath.current : undefined} placement="bottom" transition>
+        <input 
+            ref={input}
+            value={math}
+            onChange={updateInput} 
+            className={classes.input}
+            spellCheck={false}
+            onKeyPress={focusAutocomplete} />
+        <Popper
+            open={popper.open}
+            anchorEl={popper.open ? blockMath.current : undefined}
+            placement="bottom"
+            transition
+        >
             <Paper className={classes.popper}>
                 <List>
                     {popper.suggestions.map((suggestion, i) => <ListItem button key={i}>
@@ -111,5 +134,5 @@ export default withStyles({
                 </List>
             </Paper>
         </Popper>
-    </div>);
+    </form>);
 });

@@ -2,11 +2,11 @@ import React, {useState, useContext} from 'react';
 import {BottomNavigation, BottomNavigationAction} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 
-import History from './History';
-import Graph from './Graph';
-import Editor from './Editor';
-import Settings from './Settings';
-import {PreferenceContext} from '../Store';
+import History from 'screen/History';
+import Graph from 'screen/Graph';
+import Editor from 'screen/Editor';
+import Settings from 'screen/Settings';
+import {PreferenceContext} from 'components/Store';
 
 const useStyles = makeStyles({
     root: {
@@ -14,7 +14,8 @@ const useStyles = makeStyles({
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
-        border: '10px solid black',
+        borderTop: '10px solid black',
+        borderBottom: '10px solid black',
     },
     display: {
         flex: 1,

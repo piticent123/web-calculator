@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Typography, Grid, TextField, Button} from '@material-ui/core';
 import {withStyles} from '@material-ui/styles';
 
-import {DataContext, DataEvents} from '../Store';
+import {DataContext, DataEvents} from 'components/Store';
 
 export default withStyles({
     button: {

@@ -1,4 +1,5 @@
 import React, {useState, useReducer, createContext, useEffect} from 'react';
+import {evaluate} from 'mathjs';
 
 export const PreferenceContext = createContext();
 export const DataContext = createContext();
@@ -14,6 +15,8 @@ export const DataEvents = {
     CHANGE_LIST_NAME: 'change list name',
     ADD_LIST: 'add list',
     REMOVE_LIST: 'remove list',
+    ADD_HISTORY_ITEM: 'add history item',
+    REMOVE_HISTORY_ITEM: 'remove history item',
     LOAD: 'load',
 };
 
@@ -118,6 +121,22 @@ export default function Store({ children }) {
                 delete res.lists[action.list];
                 return res;
             }
+            case DataEvents.ADD_HISTORY_ITEM: 
+                return {
+                    ...state,
+                    history: state.history.concat({
+                        input: action.math,
+                        output: evaluate(action.math, state.variables).toString(),
+                    }),
+                };
+            case DataEvents.REMOVE_HISTORY_ITEM: {
+                const history = state.history.slice(0);
+                history.splice(action.n, 1);
+                return {
+                    ...state,
+                    history,
+                };
+            }
             default:
                 return state;
         }
@@ -125,6 +144,7 @@ export default function Store({ children }) {
         variables: {hello: 'world'},
         lists: {},
         functions: {f1: 'x'},
+        history: [],
     });
 
     useEffect(() => {

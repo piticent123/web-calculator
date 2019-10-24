@@ -1,8 +1,8 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import {withStyles} from '@material-ui/styles';
 
 export default withStyles({
 
-})(function Editor({ classes }) {
-	return <div />;
+})(function Algebra({ classes }) {
+    return <div />;
 });
