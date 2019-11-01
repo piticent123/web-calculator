@@ -1,0 +1,62 @@
+[
+    {
+        "category": "UI",
+        "settings": [
+            {
+                "label": "Screen Height",
+                "value": "screenHeight",
+                "type": "number",
+                "min": 10,
+                "max": 100
+            },
+            {
+                "label": "Emulation Mode",
+                "value": "editor",
+                "type": "select",
+                "options": [
+                    {"label": "TI-108", "value": "arithmetic"},
+                    {"label": "TI-30Xa", "value": "algebra"},
+                    {"label": "TI-84 Plus CE", "value": "calculus"},
+                    {"label": "TI-Nspire", "value": "statistics"}
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Graph",
+        "settings": [
+            {
+                "label": "X Start",
+                "value": "startX",
+                "type": "number"
+            },
+            {
+                "label": "X Step",
+                "value": "stepX",
+                "type": "number",
+                "min": 0
+            },
+            {
+                "label": "X Stop",
+                "value": "stopX",
+                "type": "number"
+            },
+            {
+                "label": "Y Start",
+                "value": "startY",
+                "type": "number"
+            },
+            {
+                "label": "Y Step",
+                "value": "stepY",
+                "type": "number",
+                "min": 0
+            },
+            {
+                "label": "Y Stop",
+                "value": "stopY",
+                "type": "number"
+            }
+        ]
+    }
+]

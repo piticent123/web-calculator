@@ -17,7 +17,7 @@ export default withStyles({
         padding: '1rem 2rem'
     }
 })(function Editor({classes}) {
-    const editor = useContext(PreferenceContext);
+    const {editor} = useContext(PreferenceContext);
 
     function renderEditor() {
         switch (editor) {

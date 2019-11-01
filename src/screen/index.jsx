@@ -46,8 +46,8 @@ export default function Screen() {
         <div>
             <BottomNavigation value={activeTab} onChange={(e, t) => setActiveTab(t)}>
                 <BottomNavigationAction label="History" value="history" icon={<i className="fad fa-2x fa-history" />} />
-                <BottomNavigationAction label="Editor" value="editor" icon={<i className="fad fa-2x fa-edit" />} />
-                <BottomNavigationAction label="Graph" value="graph" icon={<i className="fad fa-2x fa-chart-line" />} />
+                {!['arithmetic', 'algebra'].includes(settings.editor) && <BottomNavigationAction label="Editor" value="editor" icon={<i className="fad fa-2x fa-edit" />} />}
+                {!['arithmetic', 'algebra'].includes(settings.editor) && <BottomNavigationAction label="Graph" value="graph" icon={<i className="fad fa-2x fa-chart-line" />} />}
                 <BottomNavigationAction label="Settings" value="settings" icon={<i className="fad fa-2x fa-cog" />} />
             </BottomNavigation>
         </div>
