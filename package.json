@@ -2,6 +2,7 @@
   "name": "web-calculator",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://jordanpitlor.com/web-calculator",
   "dependencies": {
     "@material-ui/core": "^4.5.0",
     "@material-ui/styles": "^4.5.0",
