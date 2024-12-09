@@ -8,7 +8,7 @@
     "@material-ui/styles": "^4.5.0",
     "chart.js": "^2.8.0",
     "lodash.range": "^3.2.0",
-    "mathjs": "^6.2.3",
+    "mathjs": "^7.5.1",
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
